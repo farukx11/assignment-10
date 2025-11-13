@@ -55,7 +55,6 @@ const Home = () => {
         darkMode ? "bg-[#0F172A] text-[#E2E8F0]" : "bg-[#F8FAFC] text-[#1E293B]"
       } min-h-screen relative`}
     >
-      {/* ---------- Dark/Light Toggle Icon ---------- */}
       <div className="fixed top-24 right-6 z-50">
         <button
           onClick={toggleDarkMode}
@@ -96,7 +95,6 @@ const Home = () => {
         </button>
       </div>
 
-      {/* ---------- Banner Section ---------- */}
       <section className="relative py-40">
         <div className="container mx-auto px-6 flex flex-col-reverse md:flex-row items-center justify-between gap-8">
           {/* Text on Left */}
@@ -126,7 +124,6 @@ const Home = () => {
             )}
           </div>
 
-          {/* Rotating Image on Right */}
           <div className="md:w-1/2 flex justify-center md:justify-end mb-8 md:mb-0">
             <img
               src={bannerCircle}
@@ -137,7 +134,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ---------- Financial Overview Section (Gradient Background with Hex Codes) ---------- */}
       <section
         className={`relative py-40 text-center ${
           darkMode
@@ -154,7 +150,6 @@ const Home = () => {
             Your Financial Overview
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {/* Income Card */}
             <div
               className={`shadow-md rounded-lg p-6 ${
                 darkMode ? "bg-[#1E293B]/80" : "bg-[#FFFFFF]/90"
@@ -166,7 +161,6 @@ const Home = () => {
               <p className="text-3xl font-bold mt-2">${overview.income}</p>
             </div>
 
-            {/* Expense Card */}
             <div
               className={`shadow-md rounded-lg p-6 ${
                 darkMode ? "bg-[#1E293B]/80" : "bg-[#FFFFFF]/90"
@@ -178,7 +172,6 @@ const Home = () => {
               <p className="text-3xl font-bold mt-2">${overview.expense}</p>
             </div>
 
-            {/* Balance Card */}
             <div
               className={`shadow-md rounded-lg p-6 ${
                 darkMode ? "bg-[#1E293B]/80" : "bg-[#FFFFFF]/90"
@@ -193,7 +186,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ---------- Budgeting Tips Section ---------- */}
       <section
         className={`${
           darkMode
@@ -249,7 +241,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ---------- Why Financial Planning Matters ---------- */}
       <section className="container mx-auto px-6 py-40 text-center">
         <h2
           className={`text-3xl font-bold mb-6 ${
