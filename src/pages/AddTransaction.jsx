@@ -46,14 +46,12 @@ const AddTransaction = () => {
       });
 
       toast.success("Transaction added successfully!");
-      // Reset form
       setTitle("");
       setAmount("");
       setType("income");
       setCategory("");
       setDescription("");
       setDate(null);
-      // Navigate to dashboard after write
       navigate("/dashboard");
     } catch (error) {
       console.error(error);
