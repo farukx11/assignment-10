@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import {
   ResponsiveContainer,
@@ -11,6 +18,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
+import Swal from "sweetalert2";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -40,6 +48,7 @@ const Dashboard = () => {
         if (data.type === "expense") expense += txAmount;
 
         tempChartData.push({
+          id: doc.id,
           name: data.title,
           Income: data.type === "income" ? txAmount : 0,
           Expense: data.type === "expense" ? txAmount : 0,
@@ -56,6 +65,25 @@ const Dashboard = () => {
 
     return () => unsubscribe();
   }, [user]);
+
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This transaction will be deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await deleteDoc(doc(db, "transactions", id));
+        Swal.fire("Deleted!", "Transaction has been deleted.", "success");
+      } catch (error) {
+        Swal.fire("Error!", error.message, "error");
+      }
+    }
+  };
 
   return (
     <div className="container mx-auto p-6">
@@ -109,6 +137,32 @@ const Dashboard = () => {
           </ResponsiveContainer>
         ) : (
           <p className="text-center text-gray-500">No transactions yet</p>
+        )}
+      </div>
+
+      {/* Transaction List */}
+      <div className="bg-white p-6 rounded-lg shadow">
+        <h3 className="text-xl font-bold mb-4">Transactions</h3>
+        {chartData.length > 0 ? (
+          <ul>
+            {chartData.map((tx) => (
+              <li key={tx.id} className="flex justify-between border-b py-2">
+                <span>{tx.name}</span>
+                <div>
+                  <span className="mr-4 text-green-600">${tx.Income}</span>
+                  <span className="mr-4 text-red-600">${tx.Expense}</span>
+                  <button
+                    onClick={() => handleDelete(tx.id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-500">No transactions available.</p>
         )}
       </div>
     </div>

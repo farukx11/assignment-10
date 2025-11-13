@@ -7,14 +7,15 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import { useAuth } from "../context/AuthContext";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useNavigate } from "react-router-dom";
 
 const AddTransaction = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [type, setType] = useState("income");
@@ -25,9 +26,9 @@ const AddTransaction = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!user) return toast.error("Please login first!");
+    if (!user) return Swal.fire("Error", "Please login first!", "error");
     if (!title || !amount || !category || !date)
-      return toast.error("Please fill all required fields correctly.");
+      return Swal.fire("Error", "Please fill all required fields", "error");
 
     setLoading(true);
     try {
@@ -44,10 +45,15 @@ const AddTransaction = () => {
         createdAt: serverTimestamp(),
       });
 
-      // ✅ Show toast first
-      toast.success("Transaction added successfully!");
+      Swal.fire({
+        icon: "success",
+        title: "Transaction Added!",
+        text: `${title} added successfully`,
+        timer: 1500,
+        showConfirmButton: false,
+      });
 
-      // Reset form
+      // reset form
       setTitle("");
       setAmount("");
       setType("income");
@@ -55,42 +61,41 @@ const AddTransaction = () => {
       setDescription("");
       setDate(null);
 
-      // Redirect after short delay (toast visible)
-      setTimeout(() => navigate("/dashboard"), 1000);
+      // redirect after short delay
+      setTimeout(() => navigate("/dashboard"), 1500);
     } catch (error) {
-      console.error(error);
-      toast.error("Failed: " + error.message);
+      Swal.fire("Error", error.message, "error");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="container mx-auto p-6 max-w-md">
+    <div className="container mx-auto max-w-md p-6">
       <h2 className="text-2xl font-bold mb-4">Add Transaction</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           placeholder="Title"
-          className="w-full p-2 border rounded"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className="w-full p-2 border rounded"
           required
         />
         <input
           type="number"
           placeholder="Amount"
-          className="w-full p-2 border rounded"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          required
+          className="w-full p-2 border rounded"
           min="0.01"
           step="0.01"
+          required
         />
         <select
-          className="w-full p-2 border rounded"
           value={type}
           onChange={(e) => setType(e.target.value)}
+          className="w-full p-2 border rounded"
         >
           <option value="income">Income</option>
           <option value="expense">Expense</option>
@@ -98,33 +103,31 @@ const AddTransaction = () => {
         <input
           type="text"
           placeholder="Category"
-          className="w-full p-2 border rounded"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          className="w-full p-2 border rounded"
           required
         />
         <textarea
           placeholder="Description (optional)"
-          className="w-full p-2 border rounded"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          className="w-full p-2 border rounded"
         />
         <DatePicker
           selected={date}
           onChange={setDate}
-          dateFormat="dd-MM-yyyy"
-          placeholderText="Select date (DD-MM-YYYY)"
           className="w-full p-2 border rounded"
+          placeholderText="Select date"
+          dateFormat="dd-MM-yyyy"
           required
         />
         <button
           type="submit"
-          className={`w-full py-2 rounded text-white ${
-            loading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
-          }`}
           disabled={loading}
+          className={`w-full py-2 rounded text-white ${
+            loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+          }`}
         >
           {loading ? "Adding..." : "Add Transaction"}
         </button>

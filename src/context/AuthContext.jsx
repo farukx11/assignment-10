@@ -6,7 +6,6 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
-  GoogleAuthProvider,
 } from "firebase/auth";
 import { auth, googleProvider } from "../firebase/firebase.config";
 
@@ -18,13 +17,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser || null);
+      setUser(currentUser);
       setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
-  const registerUser = async (name, email, password, photoURL) => {
+  const registerUser = async (name, email, password) => {
     setLoading(true);
     try {
       const result = await createUserWithEmailAndPassword(
@@ -32,14 +31,9 @@ export const AuthProvider = ({ children }) => {
         email,
         password
       );
-      await updateProfile(result.user, {
-        displayName: name,
-        photoURL: photoURL || null,
-      });
-      setUser({ ...result.user });
+      await updateProfile(result.user, { displayName: name });
+      setUser(result.user);
       return result.user;
-    } catch (error) {
-      throw error;
     } finally {
       setLoading(false);
     }
@@ -49,10 +43,8 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
-      setUser({ ...result.user });
+      setUser(result.user);
       return result.user;
-    } catch (error) {
-      throw error;
     } finally {
       setLoading(false);
     }
@@ -64,8 +56,6 @@ export const AuthProvider = ({ children }) => {
       const result = await signInWithPopup(auth, googleProvider);
       setUser(result.user);
       return result.user;
-    } catch (error) {
-      throw error;
     } finally {
       setLoading(false);
     }
@@ -76,8 +66,6 @@ export const AuthProvider = ({ children }) => {
     try {
       await signOut(auth);
       setUser(null);
-    } catch (error) {
-      console.error("Logout failed:", error);
     } finally {
       setLoading(false);
     }
@@ -92,4 +80,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// Custom hook
 export const useAuth = () => useContext(AuthContext);

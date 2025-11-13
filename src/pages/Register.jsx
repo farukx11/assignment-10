@@ -15,20 +15,21 @@ const Register = () => {
   const { registerUser, googleLogin } = useAuth();
   const navigate = useNavigate();
 
-  // Password validation function
+  // ✅ Password validation function
   const validatePassword = (password) => {
-    // Minimum 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    // Must have uppercase, lowercase, number, and at least 6 characters
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
     return regex.test(password);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!validatePassword(password)) {
       Swal.fire({
         icon: "error",
         title: "Weak Password",
-        text: "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.",
+        text: "Password must have at least 6 characters including uppercase, lowercase, and a number.",
       });
       return;
     }
@@ -39,10 +40,15 @@ const Register = () => {
       Swal.fire({
         icon: "success",
         title: "Registration Successful!",
+        text: "Please log in to continue.",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 1800,
       });
-      navigate("/dashboard");
+
+      // ✅ Redirect to login page after short delay
+      setTimeout(() => {
+        navigate("/login");
+      }, 1800);
     } catch (err) {
       Swal.fire({
         icon: "error",
@@ -64,10 +70,13 @@ const Register = () => {
       Swal.fire({
         icon: "success",
         title: "Google Registration Successful!",
+        text: "Please log in to continue.",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 1800,
       });
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1800);
     } catch (err) {
       Swal.fire({
         icon: "error",
