@@ -5,7 +5,7 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import Swal from "sweetalert2";
 import bannerCircle from "../assets/circle.png";
-import "../app.css"; // Import the CSS animation
+import "../app.css";
 
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -52,7 +52,7 @@ const Home = () => {
   return (
     <div
       className={`${
-        darkMode ? "bg-gray-900 text-gray-200" : "bg-gray-50 text-gray-800"
+        darkMode ? "bg-[#0F172A] text-[#E2E8F0]" : "bg-[#F8FAFC] text-[#1E293B]"
       } min-h-screen relative`}
     >
       {/* ---------- Dark/Light Toggle Icon ---------- */}
@@ -103,7 +103,7 @@ const Home = () => {
           <div className="md:w-1/2 text-center md:text-left">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Take Control of Your Finances with{" "}
-              <span className="text-yellow-300">FinEase</span>
+              <span className="text-[#3B82F6]">FinEase</span>
             </h1>
             <p className="text-lg mb-6">
               Track your income, expenses, and savings effortlessly — build a
@@ -112,14 +112,14 @@ const Home = () => {
             {!user ? (
               <Link
                 to="/register"
-                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors"
+                className="px-6 py-3 bg-[#3B82F6] text-white font-semibold rounded-md hover:bg-[#2563EB] transition-colors"
               >
                 Get Started
               </Link>
             ) : (
               <Link
                 to="/dashboard"
-                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
+                className="px-6 py-3 bg-[#3B82F6] text-white font-semibold rounded-md hover:bg-[#2563EB] transition"
               >
                 Go to Dashboard
               </Link>
@@ -137,45 +137,58 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ---------- Overview Section ---------- */}
-      <section className="container mx-auto px-6 py-40 text-center">
-        <h2
-          className={`text-3xl font-bold mb-10 ${
-            darkMode ? "text-gray-200" : "text-gray-800"
-          }`}
-        >
-          Your Financial Overview
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div
-            className={`shadow-md rounded-lg p-6 ${
-              darkMode ? "bg-gray-700" : "bg-white"
+      {/* ---------- Financial Overview Section (Gradient Background with Hex Codes) ---------- */}
+      <section
+        className={`relative py-40 text-center ${
+          darkMode
+            ? "bg-[linear-gradient(135deg,#0F172A,#1E293B,#334155)]"
+            : "bg-[linear-gradient(135deg,#DBEAFE,#EFF6FF,#DBEAFE)]"
+        }`}
+      >
+        <div className="container mx-auto px-6">
+          <h2
+            className={`text-3xl font-bold mb-10 ${
+              darkMode ? "text-[#E2E8F0]" : "text-[#1E293B]"
             }`}
           >
-            <h3 className="text-xl font-semibold mb-2 text-green-500">
-              Total Income
-            </h3>
-            <p className="text-3xl font-bold mt-2">${overview.income}</p>
-          </div>
-          <div
-            className={`shadow-md rounded-lg p-6 ${
-              darkMode ? "bg-gray-700" : "bg-white"
-            }`}
-          >
-            <h3 className="text-xl font-semibold mb-2 text-red-500">
-              Total Expense
-            </h3>
-            <p className="text-3xl font-bold mt-2">${overview.expense}</p>
-          </div>
-          <div
-            className={`shadow-md rounded-lg p-6 ${
-              darkMode ? "bg-gray-700" : "bg-white"
-            }`}
-          >
-            <h3 className="text-xl font-semibold mb-2 text-blue-500">
-              Balance
-            </h3>
-            <p className="text-3xl font-bold mt-2">${overview.balance}</p>
+            Your Financial Overview
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {/* Income Card */}
+            <div
+              className={`shadow-md rounded-lg p-6 ${
+                darkMode ? "bg-[#1E293B]/80" : "bg-[#FFFFFF]/90"
+              }`}
+            >
+              <h3 className="text-xl font-semibold mb-2 text-[#22C55E]">
+                Total Income
+              </h3>
+              <p className="text-3xl font-bold mt-2">${overview.income}</p>
+            </div>
+
+            {/* Expense Card */}
+            <div
+              className={`shadow-md rounded-lg p-6 ${
+                darkMode ? "bg-[#1E293B]/80" : "bg-[#FFFFFF]/90"
+              }`}
+            >
+              <h3 className="text-xl font-semibold mb-2 text-[#EF4444]">
+                Total Expense
+              </h3>
+              <p className="text-3xl font-bold mt-2">${overview.expense}</p>
+            </div>
+
+            {/* Balance Card */}
+            <div
+              className={`shadow-md rounded-lg p-6 ${
+                darkMode ? "bg-[#1E293B]/80" : "bg-[#FFFFFF]/90"
+              }`}
+            >
+              <h3 className="text-xl font-semibold mb-2 text-[#3B82F6]">
+                Balance
+              </h3>
+              <p className="text-3xl font-bold mt-2">${overview.balance}</p>
+            </div>
           </div>
         </div>
       </section>
@@ -183,7 +196,9 @@ const Home = () => {
       {/* ---------- Budgeting Tips Section ---------- */}
       <section
         className={`${
-          darkMode ? "bg-gray-800 text-gray-200" : "bg-gray-100 text-gray-800"
+          darkMode
+            ? "bg-[#1E293B] text-[#E2E8F0]"
+            : "bg-[#F1F5F9] text-[#1E293B]"
         } py-40`}
       >
         <div className="container mx-auto px-6">
@@ -193,10 +208,10 @@ const Home = () => {
           <div className="grid md:grid-cols-3 gap-8">
             <div
               className={`p-6 rounded-lg shadow hover:shadow-lg transition ${
-                darkMode ? "bg-gray-700" : "bg-white"
+                darkMode ? "bg-[#334155]" : "bg-[#FFFFFF]"
               }`}
             >
-              <h3 className="text-xl font-semibold mb-2 text-blue-400">
+              <h3 className="text-xl font-semibold mb-2 text-[#3B82F6]">
                 Track Every Expense
               </h3>
               <p>
@@ -206,10 +221,10 @@ const Home = () => {
             </div>
             <div
               className={`p-6 rounded-lg shadow hover:shadow-lg transition ${
-                darkMode ? "bg-gray-700" : "bg-white"
+                darkMode ? "bg-[#334155]" : "bg-[#FFFFFF]"
               }`}
             >
-              <h3 className="text-xl font-semibold mb-2 text-blue-400">
+              <h3 className="text-xl font-semibold mb-2 text-[#3B82F6]">
                 Set Monthly Budgets
               </h3>
               <p>
@@ -219,10 +234,10 @@ const Home = () => {
             </div>
             <div
               className={`p-6 rounded-lg shadow hover:shadow-lg transition ${
-                darkMode ? "bg-gray-700" : "bg-white"
+                darkMode ? "bg-[#334155]" : "bg-[#FFFFFF]"
               }`}
             >
-              <h3 className="text-xl font-semibold mb-2 text-blue-400">
+              <h3 className="text-xl font-semibold mb-2 text-[#3B82F6]">
                 Save Before You Spend
               </h3>
               <p>
@@ -238,14 +253,14 @@ const Home = () => {
       <section className="container mx-auto px-6 py-40 text-center">
         <h2
           className={`text-3xl font-bold mb-6 ${
-            darkMode ? "text-gray-200" : "text-gray-800"
+            darkMode ? "text-[#E2E8F0]" : "text-[#1E293B]"
           }`}
         >
           Why Financial Planning Matters
         </h2>
         <p
           className={`max-w-3xl mx-auto leading-relaxed ${
-            darkMode ? "text-gray-300" : "text-gray-600"
+            darkMode ? "text-[#CBD5E1]" : "text-[#475569]"
           }`}
         >
           Financial planning helps you make the most out of your money by
@@ -255,7 +270,7 @@ const Home = () => {
         </p>
         <Link
           to="/add-transaction"
-          className="inline-block mt-8 px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
+          className="inline-block mt-8 px-6 py-3 bg-[#3B82F6] text-white font-semibold rounded-md hover:bg-[#2563EB] transition"
         >
           Start Managing Now
         </Link>
