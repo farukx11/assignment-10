@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -8,19 +7,14 @@ import Dashboard from "./pages/Dashboard";
 import AddTransaction from "./pages/AddTransaction";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
-
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
-
-// Toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const location = useLocation();
-
-  // যদি path * (NotFound) হয়, Navbar ও Footer লুকাও
   const hideLayout =
     location.pathname !== "/" &&
     location.pathname !== "/login" &&
@@ -38,7 +32,6 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Private Routes */}
           <Route
             path="/dashboard"
             element={
@@ -64,7 +57,6 @@ const App = () => {
             }
           />
 
-          {/* Not Found */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

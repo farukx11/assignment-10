@@ -1,8 +1,6 @@
-// src/utils/toast.js
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// Configure toast notifications
 export const notifySuccess = (message) => {
   toast.success(message, {
     position: "top-right",

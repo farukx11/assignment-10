@@ -15,13 +15,12 @@ import PrivateRoute from "../components/PrivateRoute";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />, // Layout on every page except 404
+    element: <Layout />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
 
-      // ✅ Private Routes
       {
         path: "/add-transaction",
         element: (
@@ -73,7 +72,6 @@ const router = createBrowserRouter([
     ],
   },
 
-  // ✅ 404 without Layout
   {
     path: "*",
     element: <NotFound />,
