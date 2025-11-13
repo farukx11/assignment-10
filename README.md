@@ -25,7 +25,7 @@ If you are developing a production application, we recommend using TypeScript wi
 
 ## 🌐 Live Site URL
 
-🔗 [Live Client Site](https://your-finease.netlify.app)  
+🔗 [Live Client Site](https://venerable-buttercream-a62771.netlify.app/)  
 🔗 [Live Server (Vercel)](https://finease-server.vercel.app)
 
 ---
