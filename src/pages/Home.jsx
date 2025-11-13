@@ -94,7 +94,6 @@ const Home = () => {
           )}
         </button>
       </div>
-
       <section className="relative py-40">
         <div className="container mx-auto px-6 flex flex-col-reverse md:flex-row items-center justify-between gap-8">
           <div className="md:w-1/2 text-center md:text-left">
@@ -132,7 +131,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section
         className={`relative py-40 text-center ${
           darkMode
@@ -184,7 +182,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section
         className={`${
           darkMode
@@ -239,7 +236,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+      // Create My Profile page with update profile functionality
       <section className="container mx-auto px-6 py-40 text-center">
         <h2
           className={`text-3xl font-bold mb-6 ${
