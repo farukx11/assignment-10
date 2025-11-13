@@ -1,0 +1,110 @@
+[
+  {
+    "type": "expense",
+    "category": "home",
+    "amount": 1000,
+    "description": "house rent",
+    "date": "2025-01-15T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "expense",
+    "category": "food",
+    "amount": 200,
+    "description": "grocery shopping",
+    "date": "2025-01-16T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "income",
+    "category": "salary",
+    "amount": 5000,
+    "description": "monthly salary",
+    "date": "2025-01-17T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "expense",
+    "category": "transport",
+    "amount": 150,
+    "description": "bus fare",
+    "date": "2025-01-18T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "income",
+    "category": "freelance",
+    "amount": 1000,
+    "description": "freelance project payment",
+    "date": "2025-01-19T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "expense",
+    "category": "entertainment",
+    "amount": 50,
+    "description": "movie ticket",
+    "date": "2025-01-20T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "income",
+    "category": "investment",
+    "amount": 2000,
+    "description": "stocks dividend",
+    "date": "2025-01-21T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "expense",
+    "category": "utilities",
+    "amount": 100,
+    "description": "electricity bill",
+    "date": "2025-01-22T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "income",
+    "category": "salary",
+    "amount": 4000,
+    "description": "bonus received",
+    "date": "2025-01-23T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "expense",
+    "category": "food",
+    "amount": 300,
+    "description": "restaurant dinner",
+    "date": "2025-01-24T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "expense",
+    "category": "home",
+    "amount": 500,
+    "description": "home improvement",
+    "date": "2025-01-25T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "type": "income",
+    "category": "freelance",
+    "amount": 750,
+    "description": "freelance design work",
+    "date": "2025-01-26T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  }
+]

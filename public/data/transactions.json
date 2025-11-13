@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "type": "expense",
+    "category": "home",
+    "amount": 1000,
+    "description": "House Rent",
+    "date": "2025-01-15T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "2",
+    "type": "income",
+    "category": "salary",
+    "amount": 5000,
+    "description": "Monthly Salary",
+    "date": "2025-01-25T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "3",
+    "type": "expense",
+    "category": "food",
+    "amount": 200,
+    "description": "Groceries",
+    "date": "2025-01-18T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "4",
+    "type": "expense",
+    "category": "transport",
+    "amount": 50,
+    "description": "Bus Ticket",
+    "date": "2025-01-20T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "5",
+    "type": "income",
+    "category": "freelance",
+    "amount": 800,
+    "description": "Project Payment",
+    "date": "2025-01-22T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "6",
+    "type": "expense",
+    "category": "shopping",
+    "amount": 150,
+    "description": "Clothes",
+    "date": "2025-01-23T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "7",
+    "type": "expense",
+    "category": "health",
+    "amount": 100,
+    "description": "Medicine",
+    "date": "2025-01-24T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "8",
+    "type": "income",
+    "category": "bonus",
+    "amount": 300,
+    "description": "Year-end Bonus",
+    "date": "2025-01-26T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "9",
+    "type": "expense",
+    "category": "entertainment",
+    "amount": 120,
+    "description": "Movie Night",
+    "date": "2025-01-27T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "10",
+    "type": "expense",
+    "category": "food",
+    "amount": 80,
+    "description": "Lunch Out",
+    "date": "2025-01-28T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "11",
+    "type": "income",
+    "category": "investment",
+    "amount": 200,
+    "description": "Stock Dividend",
+    "date": "2025-01-29T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  },
+  {
+    "id": "12",
+    "type": "expense",
+    "category": "transport",
+    "amount": 60,
+    "description": "Taxi Fare",
+    "date": "2025-01-30T00:00:00.000Z",
+    "email": "xyz@gmail.com",
+    "name": "Hero"
+  }
+]
