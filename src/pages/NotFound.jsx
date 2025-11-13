@@ -9,7 +9,6 @@ const NotFound = () => {
         404
       </h1>
 
-      {/* Message */}
       <p className="text-lg md:text-2xl text-gray-700 mb-8 animate-fadeIn opacity-0">
         Oops! The page you are looking for doesn’t exist or has been moved.
       </p>

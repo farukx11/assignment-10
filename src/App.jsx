@@ -19,7 +19,15 @@ import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const location = useLocation();
-  const hideLayout = location.pathname === "/404";
+
+  // যদি path * (NotFound) হয়, Navbar ও Footer লুকাও
+  const hideLayout =
+    location.pathname !== "/" &&
+    location.pathname !== "/login" &&
+    location.pathname !== "/register" &&
+    location.pathname !== "/dashboard" &&
+    location.pathname !== "/add-transaction" &&
+    location.pathname !== "/profile";
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
@@ -30,6 +38,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
+          {/* Private Routes */}
           <Route
             path="/dashboard"
             element={
@@ -54,6 +63,8 @@ const App = () => {
               </PrivateRoute>
             }
           />
+
+          {/* Not Found */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
