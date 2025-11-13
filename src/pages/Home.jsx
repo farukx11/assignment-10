@@ -97,7 +97,6 @@ const Home = () => {
 
       <section className="relative py-40">
         <div className="container mx-auto px-6 flex flex-col-reverse md:flex-row items-center justify-between gap-8">
-          {/* Text on Left */}
           <div className="md:w-1/2 text-center md:text-left">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Take Control of Your Finances with{" "}

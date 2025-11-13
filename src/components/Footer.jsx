@@ -7,7 +7,7 @@ import {
   FaMapMarkerAlt,
   FaEnvelope,
 } from "react-icons/fa";
-import { SiX } from "react-icons/si"; // X (Twitter rebrand)
+import { SiX } from "react-icons/si";
 import logo from "../assets/FinEase.png";
 
 const Footer = ({ user }) => {
@@ -75,7 +75,6 @@ const Footer = ({ user }) => {
           </div>
         </div>
 
-        {/* Page Links */}
         <div>
           <h2 className="text-lg font-semibold mb-3">Pages</h2>
           <ul className="space-y-2 text-gray-300">
@@ -95,7 +94,6 @@ const Footer = ({ user }) => {
           </ul>
         </div>
 
-        {/* Contact Info */}
         <div>
           <h2 className="text-lg font-semibold mb-3">Contact</h2>
           <p className="text-gray-300 flex items-center space-x-2 mb-2">
@@ -114,7 +112,6 @@ const Footer = ({ user }) => {
         </div>
       </div>
 
-      {/* Copyright */}
       <div className="bg-[#356A6A] mt-10 py-3 text-center text-sm text-gray-200">
         Copyright © {new Date().getFullYear()}{" "}
         <span className="font-semibold">FinEase</span>. All Rights Reserved.
