@@ -7,6 +7,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import Swal from "sweetalert2";
 import { auth, googleProvider } from "../firebase/firebase.config";
 
 const AuthContext = createContext();
@@ -36,7 +37,20 @@ export const AuthProvider = ({ children }) => {
         photoURL: photoURL || null,
       });
       setUser({ ...result.user });
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return result.user;
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed!",
+        text: error.message,
+      });
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -47,7 +61,20 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       setUser({ ...result.user });
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return result.user;
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed!",
+        text: error.message,
+      });
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -58,7 +85,20 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       setUser(result.user);
+      Swal.fire({
+        icon: "success",
+        title: "Google Login Successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       return result.user;
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Google Login Failed!",
+        text: error.message,
+      });
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -69,17 +109,34 @@ export const AuthProvider = ({ children }) => {
     try {
       await signOut(auth);
       setUser(null);
+      Swal.fire({
+        icon: "success",
+        title: "Logout Successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Logout Failed!",
+        text: error.message,
+      });
     } finally {
       setLoading(false);
     }
   };
 
+  const authInfo = {
+    user,
+    loading,
+    registerUser,
+    loginUser,
+    googleLogin,
+    logout,
+  };
+
   return (
-    <AuthContext.Provider
-      value={{ user, loading, registerUser, loginUser, googleLogin, logout }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
 };
 
