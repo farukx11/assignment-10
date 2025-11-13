@@ -1,4 +1,3 @@
-// src/pages/MyTransactions.jsx
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase.config";
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";

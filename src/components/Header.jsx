@@ -9,7 +9,7 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
-import { SiX } from "react-icons/si"; // ✅ Updated X logo (Twitter rebrand)
+import { SiX } from "react-icons/si";
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
@@ -34,7 +34,6 @@ const Header = () => {
   return (
     <header className="bg-blue-600 text-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center p-4">
-        {/* Logo */}
         <Link
           to="/"
           className="text-2xl font-extrabold tracking-wide flex items-center gap-2"
@@ -47,7 +46,6 @@ const Header = () => {
           FinEase
         </Link>
 
-        {/* Mobile Hamburger */}
         <button
           className="md:hidden text-2xl"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -55,7 +53,6 @@ const Header = () => {
           {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
 
-        {/* Navbar Links */}
         <nav
           className={`${
             menuOpen
@@ -67,7 +64,6 @@ const Header = () => {
             Home
           </NavLink>
 
-          {/* Protected Routes */}
           {user && (
             <>
               <NavLink to="/add-transaction" className={navLinkClass}>
@@ -82,7 +78,6 @@ const Header = () => {
             </>
           )}
 
-          {/* Login / Signup Buttons */}
           {!user ? (
             <>
               <Link
@@ -100,7 +95,6 @@ const Header = () => {
             </>
           ) : (
             <div className="relative">
-              {/* User Profile */}
               <img
                 src={user.photoURL || "https://via.placeholder.com/40"}
                 alt="User"
@@ -108,7 +102,6 @@ const Header = () => {
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               />
 
-              {/* Dropdown Menu */}
               {dropdownOpen && (
                 <div className="absolute right-0 mt-3 w-56 bg-white text-black rounded-lg shadow-lg z-50 animate-fadeIn">
                   <div className="p-3 border-b">
