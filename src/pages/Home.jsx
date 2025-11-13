@@ -236,7 +236,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-      // Create My Profile page with update profile functionality
       <section className="container mx-auto px-6 py-40 text-center">
         <h2
           className={`text-3xl font-bold mb-6 ${

@@ -99,10 +99,10 @@ const Footer = ({ user }) => {
           <p className="text-gray-300 flex items-center space-x-2 mb-2">
             <FaEnvelope className="text-gray-300" />
             <a
-              href="mailto:contact@thefinease.com"
+              href="mailto:web@programming-hero.com"
               className="hover:text-green-400 transition-colors"
             >
-              contact@thefinease.com
+              web@programming-hero.com
             </a>
           </p>
           <p className="text-gray-300 flex items-center space-x-2">
