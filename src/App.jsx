@@ -1,15 +1,11 @@
-// src/App.jsx
 import React from "react";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AddTransaction from "./pages/AddTransaction";
-import MyTransactions from "./pages/MyTransactions";
-import TransactionDetails from "./pages/TransactionDetails";
-import UpdateTransaction from "./pages/UpdateTransaction";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
@@ -17,7 +13,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
 
-// React Toastify
+// Toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -28,14 +24,12 @@ const App = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       {!hideLayout && <Navbar />}
-
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Private Routes */}
           <Route
             path="/dashboard"
             element={
@@ -53,30 +47,6 @@ const App = () => {
             }
           />
           <Route
-            path="/my-transactions"
-            element={
-              <PrivateRoute>
-                <MyTransactions />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/transaction/:id"
-            element={
-              <PrivateRoute>
-                <TransactionDetails />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/transaction/update/:id"
-            element={
-              <PrivateRoute>
-                <UpdateTransaction />
-              </PrivateRoute>
-            }
-          />
-          <Route
             path="/profile"
             element={
               <PrivateRoute>
@@ -84,13 +54,10 @@ const App = () => {
               </PrivateRoute>
             }
           />
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-
       {!hideLayout && <Footer />}
-
       <ToastContainer
         position="top-right"
         autoClose={3000}

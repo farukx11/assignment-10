@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 import { auth, googleProvider } from "../firebase/firebase.config";
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -17,13 +17,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      setUser(currentUser || null);
       setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
-  const registerUser = async (name, email, password) => {
+  const registerUser = async (name, email, password, photoURL) => {
     setLoading(true);
     try {
       const result = await createUserWithEmailAndPassword(
@@ -31,8 +31,11 @@ export const AuthProvider = ({ children }) => {
         email,
         password
       );
-      await updateProfile(result.user, { displayName: name });
-      setUser(result.user);
+      await updateProfile(result.user, {
+        displayName: name,
+        photoURL: photoURL || null,
+      });
+      setUser({ ...result.user });
       return result.user;
     } finally {
       setLoading(false);
@@ -43,7 +46,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
-      setUser(result.user);
+      setUser({ ...result.user });
       return result.user;
     } finally {
       setLoading(false);
@@ -80,5 +83,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook
 export const useAuth = () => useContext(AuthContext);
+export { AuthContext };

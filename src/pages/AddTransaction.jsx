@@ -7,10 +7,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 const AddTransaction = () => {
   const { user } = useAuth();
@@ -26,9 +26,9 @@ const AddTransaction = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!user) return Swal.fire("Error", "Please login first!", "error");
+    if (!user) return toast.error("Please login first!");
     if (!title || !amount || !category || !date)
-      return Swal.fire("Error", "Please fill all required fields", "error");
+      return toast.error("Please fill all required fields.");
 
     setLoading(true);
     try {
@@ -45,33 +45,26 @@ const AddTransaction = () => {
         createdAt: serverTimestamp(),
       });
 
-      Swal.fire({
-        icon: "success",
-        title: "Transaction Added!",
-        text: `${title} added successfully`,
-        timer: 1500,
-        showConfirmButton: false,
-      });
-
-      // reset form
+      toast.success("Transaction added successfully!");
+      // Reset form
       setTitle("");
       setAmount("");
       setType("income");
       setCategory("");
       setDescription("");
       setDate(null);
-
-      // redirect after short delay
-      setTimeout(() => navigate("/dashboard"), 1500);
+      // Navigate to dashboard after write
+      navigate("/dashboard");
     } catch (error) {
-      Swal.fire("Error", error.message, "error");
+      console.error(error);
+      toast.error("Failed: " + error.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="container mx-auto max-w-md p-6">
+    <div className="container mx-auto p-6 max-w-md">
       <h2 className="text-2xl font-bold mb-4">Add Transaction</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -88,9 +81,9 @@ const AddTransaction = () => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           className="w-full p-2 border rounded"
+          required
           min="0.01"
           step="0.01"
-          required
         />
         <select
           value={type}
@@ -117,9 +110,9 @@ const AddTransaction = () => {
         <DatePicker
           selected={date}
           onChange={setDate}
-          className="w-full p-2 border rounded"
-          placeholderText="Select date"
           dateFormat="dd-MM-yyyy"
+          placeholderText="Select date"
+          className="w-full p-2 border rounded"
           required
         />
         <button
