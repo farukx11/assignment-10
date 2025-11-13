@@ -15,9 +15,7 @@ const Register = () => {
   const { registerUser, googleLogin } = useAuth();
   const navigate = useNavigate();
 
-  // ✅ Password validation function
   const validatePassword = (password) => {
-    // Must have uppercase, lowercase, number, and at least 6 characters
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
     return regex.test(password);
   };
@@ -45,7 +43,6 @@ const Register = () => {
         timer: 1800,
       });
 
-      // ✅ Redirect to login page after short delay
       setTimeout(() => {
         navigate("/login");
       }, 1800);
@@ -119,7 +116,6 @@ const Register = () => {
             required
           />
 
-          {/* Password input with toggle */}
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}

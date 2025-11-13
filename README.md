@@ -81,7 +81,7 @@ If you are developing a production application, we recommend using TypeScript wi
 
 **Frontend:** React, Firebase, Recharts, Tailwind CSS, SweetAlert2  
 **Backend:** Node.js, Express.js, MongoDB, Firebase Admin SDK  
-**Hosting:** Netlify (client) + Vercel (server)
+**Hosting:** Netlify (client)
 
 ---
 
