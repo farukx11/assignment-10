@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import { toast } from "react-toastify";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const UpdateTransaction = () => {
   const { id } = useParams();
@@ -67,60 +69,75 @@ const UpdateTransaction = () => {
   if (loading) return <p className="text-center mt-4">Loading...</p>;
 
   return (
-    <div className="container mx-auto p-6 max-w-md">
-      <h2 className="text-2xl font-bold mb-4">Update Transaction</h2>
-      <form onSubmit={handleUpdate} className="space-y-4">
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <input
-          type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <select
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-          className="w-full p-2 border rounded"
-        >
-          <option value="income">Income</option>
-          <option value="expense">Expense</option>
-        </select>
-        <input
-          type="text"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-2 border rounded"
-        />
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          className="w-full p-2 border rounded"
-          required
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className={`w-full py-2 rounded text-white ${
-            loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
-          }`}
-        >
-          {loading ? "Updating..." : "Update Transaction"}
-        </button>
-      </form>
+    <div className="min-h-screen relative">
+      {/* Navbar */}
+      <Navbar />
+
+      {/* Main Content */}
+      <div className="container mx-auto p-6 max-w-md mt-6 mb-6">
+        <h2 className="text-2xl font-bold mb-4">Update Transaction</h2>
+        <form onSubmit={handleUpdate} className="space-y-4">
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full p-2 border rounded"
+            placeholder="Title"
+            required
+          />
+          <input
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            className="w-full p-2 border rounded"
+            placeholder="Amount"
+            required
+          />
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            className="w-full p-2 border rounded"
+          >
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full p-2 border rounded"
+            placeholder="Category"
+            required
+          />
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full p-2 border rounded"
+            placeholder="Description (optional)"
+          />
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className="w-full p-2 border rounded"
+            required
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full py-2 rounded text-white ${
+              loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+            }`}
+          >
+            {loading ? "Updating..." : "Update Transaction"}
+          </button>
+        </form>
+      </div>
+
+      {/* Footer */}
+      <div className="absolute bottom-0 left-0 w-full">
+        <Footer />
+      </div>
     </div>
   );
 };

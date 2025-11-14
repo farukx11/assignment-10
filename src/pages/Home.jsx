@@ -29,12 +29,15 @@ const Home = () => {
     try {
       setLoading(true);
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/transactions/overview?email=${
-          user.email
-        }`
+        `${import.meta.env.VITE_API_URL}/api/transactions/overview`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`, // Include the JWT token in the headers
+          },
+        }
       );
       if (res.data) {
-        setOverview(res.data);
+        setOverview(res.data); // Set the fetched data into the state
       } else {
         Swal.fire("No Data", "No financial data found", "info");
       }
