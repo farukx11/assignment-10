@@ -41,6 +41,7 @@ const Navbar = () => {
         setDropdownOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -49,15 +50,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white rounded-xl mx-4 my-3 px-6 py-3 flex justify-between items-center shadow-md relative z-50">
+      {/* Logo */}
       <Link to="/" className="flex items-center space-x-2">
-        <img
-          src={logo}
-          alt="FinEase Logo"
-          className="w-10 h-10 object-contain"
-        />
+        <img src={logo} alt="FinEase" className="w-10 h-10" />
         <span className="text-xl font-extrabold text-[#144C52]">FinEase</span>
       </Link>
 
+      {/* Desktop Menu */}
       <div className="hidden md:flex items-center space-x-4 text-[#2E3A59]">
         {navLinks.map((link) => {
           if (link.protected && !user) return null;
@@ -74,28 +73,38 @@ const Navbar = () => {
           );
         })}
 
+        {/* User Dropdown */}
         {user ? (
-          <div
-            className="flex items-center space-x-3 relative"
-            ref={dropdownRef}
-          >
+          <div className="relative" ref={dropdownRef}>
             <img
               src={user.photoURL || "/default-avatar.png"}
               alt="User"
-              className="w-10 h-10 rounded-full cursor-pointer border border-gray-200 hover:border-blue-500 transition-all"
+              className="w-10 h-10 rounded-full cursor-pointer border hover:border-blue-500 transition-all"
               onClick={() => setDropdownOpen(!dropdownOpen)}
             />
 
             {dropdownOpen && (
-              <div className="absolute top-full mt-6 right-0 w-56 bg-white border rounded-2xl shadow-lg py-3 z-50 animate-fadeIn">
+              <div
+                className="absolute right-0 bg-white border rounded-2xl shadow-xl py-3 w-56 z-50 animate-fadeIn"
+                style={{ top: "200%" }} // navbar থেকে নিচে দেখায়
+              >
                 <div className="px-4 mb-2">
-                  <p className="font-medium">{user.displayName || "User"}</p>
+                  <p className="font-medium">{user.displayName}</p>
                   <p className="text-sm text-gray-500">{user.email}</p>
                 </div>
+
+                <Link
+                  to="/profile"
+                  onClick={() => setDropdownOpen(false)}
+                  className="w-full block px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors font-medium"
+                >
+                  Update Profile
+                </Link>
+
                 <button
                   onClick={handleLogout}
                   disabled={loggingOut}
-                  className={`w-full text-left px-4 py-2 hover:bg-gray-100 transition-colors font-medium ${
+                  className={`w-full text-left px-4 py-2 hover:bg-gray-100 transition-colors font-medium cursor-pointer ${
                     loggingOut ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 >
@@ -122,17 +131,13 @@ const Navbar = () => {
         )}
       </div>
 
+      {/* Mobile Menu Button */}
       <div className="md:hidden flex items-center">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="text-[#2E3A59] focus:outline-none"
+          className="text-[#2E3A59]"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg className="w-7 h-7" fill="none" stroke="currentColor">
             {mobileMenuOpen ? (
               <path
                 strokeLinecap="round"
@@ -152,6 +157,7 @@ const Navbar = () => {
         </button>
       </div>
 
+      {/* Mobile Menu */}
       <div
         className={`md:hidden absolute left-0 w-full bg-white rounded-xl flex flex-col items-center py-4 space-y-2 z-40 shadow-lg transition-all duration-300 ease-in-out ${
           mobileMenuOpen
@@ -166,7 +172,7 @@ const Navbar = () => {
               key={link.name}
               to={link.path}
               onClick={() => setMobileMenuOpen(false)}
-              className={`font-medium hover:text-blue-600 transition-colors w-3/4 text-center py-2 rounded-none ${
+              className={`font-medium hover:text-blue-600 transition-colors w-3/4 text-center py-2 ${
                 isActive(link.path) ? "text-blue-600 underline" : ""
               }`}
             >
@@ -175,21 +181,32 @@ const Navbar = () => {
           );
         })}
 
+        {/* Mobile User Menu */}
         {user ? (
-          <div className="flex flex-col items-center space-y-2 mt-2 w-3/4">
+          <div className="flex flex-col items-center space-y-2 mt-2 w-full">
             <img
               src={user.photoURL || "/default-avatar.png"}
               alt="User"
               className="w-10 h-10 rounded-full"
             />
+
             <div className="text-sm text-gray-700 text-center">
-              <p className="font-medium">{user.displayName || "User"}</p>
+              <p className="font-medium">{user.displayName}</p>
               <p className="text-xs text-gray-500">{user.email}</p>
             </div>
+
+            <Link
+              to="/profile"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block mx-auto w-32 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors cursor-pointer text-center"
+            >
+              Update Profile
+            </Link>
+
             <button
               onClick={handleLogout}
               disabled={loggingOut}
-              className={`px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors w-24 cursor-pointer ${
+              className={`block mx-auto w-32 bg-red-400 text-white py-2 rounded hover:bg-red-500 transition-colors cursor-pointer text-center ${
                 loggingOut ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
@@ -197,22 +214,23 @@ const Navbar = () => {
             </button>
           </div>
         ) : (
-          <div className="flex flex-col items-center space-y-2 mt-2 w-full">
+          <>
             <Link
               to="/login"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors w-24 text-center"
+              className="block mx-auto w-32 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors cursor-pointer text-center"
             >
               Login
             </Link>
+
             <Link
               to="/register"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors w-24 text-center"
+              className="block mx-auto w-32 bg-green-600 text-white py-2 rounded hover:bg-green-700 transition-colors cursor-pointer text-center"
             >
               Signup
             </Link>
-          </div>
+          </>
         )}
       </div>
     </nav>

@@ -86,7 +86,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4">
+    <div className="flex justify-center items-center bg-gray-100 px-4">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4 text-center text-blue-700">
           Register at FinEase
@@ -140,7 +140,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 rounded text-white font-semibold transition ${
+            className={`w-full py-2 rounded text-white font-semibold transition cursor-pointer ${
               loading
                 ? "bg-blue-400 cursor-not-allowed"
                 : "bg-blue-600 hover:bg-blue-700"
@@ -153,7 +153,7 @@ const Register = () => {
         <button
           onClick={handleGoogleLogin}
           disabled={loading}
-          className={`mt-4 w-full py-2 rounded text-white font-semibold transition ${
+          className={`mt-4 w-full py-2 rounded text-white font-semibold transition cursor-pointer ${
             loading
               ? "bg-red-400 cursor-not-allowed"
               : "bg-red-500 hover:bg-red-600"

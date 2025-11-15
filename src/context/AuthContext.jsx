@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   signOut,
-  updateProfile,
+  updateProfile as firebaseUpdateProfile,
 } from "firebase/auth";
 import Swal from "sweetalert2";
 import { auth, googleProvider } from "../firebase/firebase.config";
@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Auth State Listener
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser || null);
@@ -31,6 +32,7 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  // Register User
   const registerUser = async (name, email, password, photoURL) => {
     setLoading(true);
     try {
@@ -39,11 +41,12 @@ export const AuthProvider = ({ children }) => {
         email,
         password
       );
-      await updateProfile(result.user, {
+      await firebaseUpdateProfile(result.user, {
         displayName: name,
         photoURL: photoURL || null,
       });
       setUser({ ...result.user });
+
       localStorage.setItem("token", result.user.accessToken);
 
       Swal.fire({
@@ -52,6 +55,7 @@ export const AuthProvider = ({ children }) => {
         showConfirmButton: false,
         timer: 1500,
       });
+
       return result.user;
     } catch (error) {
       Swal.fire({
@@ -65,6 +69,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Login User
   const loginUser = async (email, password) => {
     setLoading(true);
     try {
@@ -78,6 +83,7 @@ export const AuthProvider = ({ children }) => {
         showConfirmButton: false,
         timer: 1500,
       });
+
       return result.user;
     } catch (error) {
       Swal.fire({
@@ -91,6 +97,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Google Login
   const googleLogin = async () => {
     setLoading(true);
     try {
@@ -104,6 +111,7 @@ export const AuthProvider = ({ children }) => {
         showConfirmButton: false,
         timer: 1500,
       });
+
       return result.user;
     } catch (error) {
       Swal.fire({
@@ -117,12 +125,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Logout
   const logout = async () => {
     setLoading(true);
     try {
       await signOut(auth);
       setUser(null);
       localStorage.removeItem("token");
+
       Swal.fire({
         icon: "success",
         title: "Logout Successful!",
@@ -140,6 +150,39 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // 🔥 Update User Profile
+  const updateUserProfile = async (updatedData) => {
+    if (!auth.currentUser) {
+      Swal.fire({
+        icon: "error",
+        title: "No user logged in!",
+      });
+      return null;
+    }
+    setLoading(true);
+    try {
+      await firebaseUpdateProfile(auth.currentUser, updatedData);
+      // Update local user state
+      setUser({ ...auth.currentUser });
+      Swal.fire({
+        icon: "success",
+        title: "Profile Updated Successfully!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return auth.currentUser;
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Profile Update Failed!",
+        text: error.message,
+      });
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const authInfo = {
     user,
     loading,
@@ -147,6 +190,7 @@ export const AuthProvider = ({ children }) => {
     loginUser,
     googleLogin,
     logout,
+    updateUserProfile,
   };
 
   return (
