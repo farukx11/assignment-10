@@ -20,7 +20,6 @@ import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   const location = useLocation();
 
-  // Navbar/Footer দেখানো হবে কেবল নির্দিষ্ট পেজে
   const hideLayout =
     location.pathname !== "/" &&
     location.pathname !== "/login" &&
@@ -29,7 +28,7 @@ const App = () => {
     location.pathname !== "/add-transaction" &&
     location.pathname !== "/profile" &&
     location.pathname !== "/my-transactions" &&
-    location.pathname !== "/reports" && // Reports রুট এখানে যোগ করা হলো
+    location.pathname !== "/reports" &&
     !location.pathname.startsWith("/transaction");
 
   return (
@@ -37,12 +36,10 @@ const App = () => {
       {!hideLayout && <Navbar />}
       <main className="flex-1">
         <Routes>
-          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Private Routes */}
           <Route
             path="/dashboard"
             element={
@@ -100,7 +97,6 @@ const App = () => {
             }
           />
 
-          {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

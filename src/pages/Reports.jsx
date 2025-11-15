@@ -18,7 +18,6 @@ const Reports = () => {
       where("userId", "==", user.uid)
     );
 
-    // onSnapshot দিয়ে real-time listener তৈরি
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
@@ -44,7 +43,6 @@ const Reports = () => {
       }
     );
 
-    // Cleanup function
     return () => unsubscribe();
   }, [user]);
 

@@ -1,9 +1,8 @@
-// src/pages/TransactionDetails.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
-import Swal from "sweetalert2"; // SweetAlert2 import
+import Swal from "sweetalert2";
 
 const formatDate = (d) => {
   if (!d) return "-";
@@ -75,7 +74,7 @@ const TransactionDetails = () => {
         }}
       >
         <h3 className="text-xl font-bold mb-4" style={{ color: "#DB2777" }}>
-          My Transactions
+          My Transaction
         </h3>
 
         <div className="overflow-x-auto">
@@ -102,50 +101,30 @@ const TransactionDetails = () => {
                 style={{ borderColor: "#E5E7EB" }}
               >
                 <td className="p-3 text-center">{transaction.title}</td>
-
                 <td className="p-3 text-center capitalize">
                   {transaction.type}
                 </td>
-
                 <td className="p-3 text-center">{transaction.category}</td>
-
                 <td className="p-3 text-center font-semibold">
                   ${transaction.amount}
                 </td>
-
                 <td className="p-3 text-center">
                   {formatDate(transaction.date)}
                 </td>
+                <td className="p-3 flex justify-center gap-3">
+                  <Link
+                    to={`/update-transaction/${transaction.id}`}
+                    className="px-3 py-1 bg-blue-400 text-white rounded hover:bg-blue-500 transition cursor-pointer"
+                  >
+                    Edit
+                  </Link>
 
-                <td className="p-3">
-                  <div className="flex justify-center gap-3">
-                    <Link
-                      to={`/update-transaction/${transaction.id}`}
-                      aria-label="Edit"
-                      className="hover:text-blue-800 transition text-blue-600 text-lg"
-                      style={{ lineHeight: 1 }}
-                    >
-                      ✏️
-                    </Link>
-
-                    <button
-                      onClick={handleDelete}
-                      aria-label="Delete"
-                      className="hover:text-red-800 transition text-red-600 text-lg"
-                      style={{ lineHeight: 1 }}
-                    >
-                      🗑️
-                    </button>
-
-                    <Link
-                      to="/my-transactions"
-                      aria-label="Back"
-                      className="hover:text-gray-900 transition text-gray-700 text-lg"
-                      style={{ lineHeight: 1 }}
-                    >
-                      🔙
-                    </Link>
-                  </div>
+                  <button
+                    onClick={handleDelete}
+                    className="px-3 py-1 bg-red-400 text-white rounded hover:bg-red-500 transition cursor-pointer"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>

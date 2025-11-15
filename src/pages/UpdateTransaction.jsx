@@ -70,10 +70,8 @@ const UpdateTransaction = () => {
 
   return (
     <div className="min-h-screen relative">
-      {/* Navbar */}
       <Navbar />
 
-      {/* Main Content */}
       <div className="container mx-auto p-6 max-w-md mt-6 mb-6">
         <h2 className="text-2xl font-bold mb-4">Update Transaction</h2>
         <form onSubmit={handleUpdate} className="space-y-4">
@@ -134,7 +132,6 @@ const UpdateTransaction = () => {
         </form>
       </div>
 
-      {/* Footer */}
       <div className="absolute bottom-0 left-0 w-full">
         <Footer />
       </div>

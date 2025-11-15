@@ -18,7 +18,7 @@ const Home = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    if (user?.email) {
+    if (user) {
       fetchOverview();
     } else {
       setLoading(false);
@@ -28,20 +28,28 @@ const Home = () => {
   const fetchOverview = async () => {
     try {
       setLoading(true);
+      const token = localStorage.getItem("token"); // LocalStorage থেকে token
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
       const res = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/transactions/overview`,
         {
           headers: {
-            Authorization: `Bearer ${user.token}`, // Include the JWT token in the headers
+            Authorization: `Bearer ${token}`,
           },
         }
       );
+
       if (res.data) {
-        setOverview(res.data); // Set the fetched data into the state
+        setOverview(res.data);
       } else {
         Swal.fire("No Data", "No financial data found", "info");
       }
     } catch (err) {
+      console.error(err);
       Swal.fire("Error", "Failed to load financial overview", "error");
     } finally {
       setLoading(false);
@@ -97,6 +105,7 @@ const Home = () => {
           )}
         </button>
       </div>
+
       <section className="relative py-40">
         <div className="container mx-auto px-6 flex flex-col-reverse md:flex-row items-center justify-between gap-8">
           <div className="md:w-1/2 text-center md:text-left">
@@ -134,6 +143,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Financial Overview */}
       <section
         className={`relative py-40 text-center ${
           darkMode
@@ -185,6 +196,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
       <section
         className={`${
           darkMode
@@ -239,6 +251,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
       <section className="container mx-auto px-6 py-40 text-center">
         <h2
           className={`text-3xl font-bold mb-6 ${

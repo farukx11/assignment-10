@@ -153,7 +153,9 @@ const AddTransaction = () => {
           type="submit"
           disabled={loading}
           className={`w-full py-3 rounded-md text-white ${
-            loading ? "bg-gray-400" : "bg-indigo-600 hover:bg-indigo-700"
+            loading
+              ? "bg-gray-400"
+              : "bg-indigo-600 hover:bg-indigo-700 cursor-pointer"
           }`}
         >
           {loading ? "Adding..." : "Add Transaction"}

@@ -39,7 +39,6 @@ const Dashboard = () => {
 
   const [monthFilter, setMonthFilter] = useState("all");
 
-  // --------------------- FETCH DATA ---------------------
   useEffect(() => {
     if (!user) return;
 
@@ -90,7 +89,6 @@ const Dashboard = () => {
     return () => unsubscribe();
   }, [user]);
 
-  // ---------------------- FILTER HANDLER ----------------------
   const filteredTransactions =
     monthFilter === "all"
       ? transactions
@@ -101,7 +99,6 @@ const Dashboard = () => {
       ? chartData
       : chartData.filter((tx) => tx.month === Number(monthFilter));
 
-  // ------------------- DELETE TRANSACTION -------------------
   const handleDelete = async (id) => {
     const result = await Swal.fire({
       title: "Delete Transaction?",
@@ -128,7 +125,6 @@ const Dashboard = () => {
     }
   };
 
-  // ------------------- UPDATE TRANSACTION -------------------
   const handleUpdate = async () => {
     if (!editTransaction.title || !editTransaction.amount) {
       Swal.fire({
@@ -157,7 +153,6 @@ const Dashboard = () => {
     setEditTransaction(null);
   };
 
-  // ------------------- DATE HANDLER -------------------
   const formatDate = (date) => {
     if (!date) return "N/A";
     if (date.toDate) return date.toDate().toLocaleDateString();
@@ -170,7 +165,6 @@ const Dashboard = () => {
       style={{ backgroundColor: "#F4F7FF" }}
     >
       <div className="w-full max-w-6xl p-4 md:p-6">
-        {/* ------------------- HEADER / WELCOME ------------------- */}
         <div
           className="rounded-xl flex flex-col justify-center items-center mb-10"
           style={{
@@ -191,7 +185,6 @@ const Dashboard = () => {
           </p>
         </div>
 
-        {/* ------------------- SUMMARY CARDS ------------------- */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {[
             {
@@ -231,7 +224,6 @@ const Dashboard = () => {
           ))}
         </div>
 
-        {/* ------------------- MONTH FILTER ------------------- */}
         <div className="flex justify-center mb-10 mt-4">
           <select
             value={monthFilter}
@@ -247,7 +239,6 @@ const Dashboard = () => {
           </select>
         </div>
 
-        {/* ------------------- CHART SECTION ------------------- */}
         <div
           className="p-6 rounded-xl shadow-xl mb-10"
           style={{
@@ -285,7 +276,6 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* ------------------- TRANSACTIONS TABLE ------------------- */}
         <div
           className="p-6 rounded-xl shadow-xl mb-10"
           style={{
@@ -336,18 +326,16 @@ const Dashboard = () => {
                       <td className="p-3 flex justify-center gap-3">
                         <button
                           onClick={() => setEditTransaction(tx)}
-                          style={{ color: "#3B82F6" }}
-                          className="hover:text-blue-800 transition"
+                          className="px-3 py-1 bg-blue-400 text-white rounded hover:bg-blue-500 transition cursor-pointer"
                         >
-                          ✏️
+                          Edit
                         </button>
 
                         <button
                           onClick={() => handleDelete(tx.id)}
-                          style={{ color: "#EF4444" }}
-                          className="hover:text-red-800 transition"
+                          className="px-3 py-1 bg-red-400 text-white rounded hover:bg-red-500 transition cursor-pointer"
                         >
-                          🗑️
+                          Delete
                         </button>
                       </td>
                     </tr>
@@ -358,7 +346,6 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* ------------------- EDIT MODAL ------------------- */}
         {editTransaction && (
           <div
             className="fixed inset-0 flex items-center justify-center z-50"

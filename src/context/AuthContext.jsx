@@ -20,7 +20,14 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser || null);
       setLoading(false);
+
+      if (currentUser) {
+        localStorage.setItem("token", currentUser.accessToken);
+      } else {
+        localStorage.removeItem("token");
+      }
     });
+
     return () => unsubscribe();
   }, []);
 
@@ -37,6 +44,8 @@ export const AuthProvider = ({ children }) => {
         photoURL: photoURL || null,
       });
       setUser({ ...result.user });
+      localStorage.setItem("token", result.user.accessToken);
+
       Swal.fire({
         icon: "success",
         title: "Registration Successful!",
@@ -61,6 +70,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       setUser({ ...result.user });
+      localStorage.setItem("token", result.user.accessToken);
+
       Swal.fire({
         icon: "success",
         title: "Login Successful!",
@@ -85,6 +96,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       setUser(result.user);
+      localStorage.setItem("token", result.user.accessToken);
+
       Swal.fire({
         icon: "success",
         title: "Google Login Successful!",
@@ -109,6 +122,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await signOut(auth);
       setUser(null);
+      localStorage.removeItem("token");
       Swal.fire({
         icon: "success",
         title: "Logout Successful!",
