@@ -50,13 +50,11 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white rounded-xl mx-4 my-3 px-6 py-3 flex justify-between items-center shadow-md relative z-50">
-      {/* Logo */}
       <Link to="/" className="flex items-center space-x-2">
         <img src={logo} alt="FinEase" className="w-10 h-10" />
         <span className="text-xl font-extrabold text-[#144C52]">FinEase</span>
       </Link>
 
-      {/* Desktop Menu */}
       <div className="hidden md:flex items-center space-x-4 text-[#2E3A59]">
         {navLinks.map((link) => {
           if (link.protected && !user) return null;
@@ -73,7 +71,6 @@ const Navbar = () => {
           );
         })}
 
-        {/* User Dropdown */}
         {user ? (
           <div className="relative" ref={dropdownRef}>
             <img
@@ -131,7 +128,6 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Mobile Menu Button */}
       <div className="md:hidden flex items-center">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -157,7 +153,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`md:hidden absolute left-0 w-full bg-white rounded-xl flex flex-col items-center py-4 space-y-2 z-40 shadow-lg transition-all duration-300 ease-in-out ${
           mobileMenuOpen
@@ -181,7 +176,6 @@ const Navbar = () => {
           );
         })}
 
-        {/* Mobile User Menu */}
         {user ? (
           <div className="flex flex-col items-center space-y-2 mt-2 w-full">
             <img

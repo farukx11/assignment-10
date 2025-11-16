@@ -22,7 +22,6 @@ const MyTransactions = () => {
 
   const MySwal = withReactContent(Swal);
 
-  // Fetch Transactions
   useEffect(() => {
     const fetchTransactions = async () => {
       if (!user) return;
@@ -77,7 +76,6 @@ const MyTransactions = () => {
     }
   };
 
-  // Sort Function
   const handleSort = (option) => {
     let sorted = [...transactions];
     switch (option) {
@@ -100,7 +98,6 @@ const MyTransactions = () => {
     setTransactions(sorted);
   };
 
-  // Modal Update
   const handleUpdateModal = async (tx) => {
     const { value: formValues } = await MySwal.fire({
       title: "Update Transaction",
@@ -122,7 +119,7 @@ const MyTransactions = () => {
     if (formValues) {
       try {
         await updateDoc(doc(db, "transactions", tx.id), formValues);
-        // Update locally
+
         setTransactions((prev) =>
           prev.map((t) => (t.id === tx.id ? { ...t, ...formValues } : t))
         );
@@ -152,7 +149,6 @@ const MyTransactions = () => {
         My Transactions
       </h2>
 
-      {/* Sort Options */}
       <div className="mb-6 flex flex-wrap gap-3 justify-center md:justify-start">
         <button
           onClick={() => handleSort("dateDesc")}
@@ -196,7 +192,6 @@ const MyTransactions = () => {
         </button>
       </div>
 
-      {/* Transaction List */}
       <ul className="space-y-4">
         {transactions.map((tx) => (
           <li

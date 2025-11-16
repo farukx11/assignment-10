@@ -54,7 +54,6 @@ const Profile = () => {
           My Profile
         </h2>
 
-        {/* Profile Photo */}
         <div className="text-center mb-4">
           <img
             src={user.photoURL || "https://via.placeholder.com/100"}
@@ -63,7 +62,6 @@ const Profile = () => {
           />
         </div>
 
-        {/* Update Form */}
         <form onSubmit={handleUpdate} className="space-y-3">
           <div>
             <label className="font-semibold block mb-1">Name:</label>
