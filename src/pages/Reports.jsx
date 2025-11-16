@@ -48,8 +48,8 @@ const Reports = () => {
 
   if (loading) {
     return (
-      <div className="text-center mt-20">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
       </div>
     );
   }
@@ -59,39 +59,83 @@ const Reports = () => {
   const balance = incomeToShow - expenseToShow;
 
   return (
-    <div className="flex justify-center mt-20 px-4">
-      <div
-        className="w-full max-w-md bg-white rounded-lg shadow-xl p-6"
-        style={{ border: "1px solid #e2e8f0" }}
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+    <div className="flex justify-center px-4 py-10">
+      <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-6 md:p-10">
+        <h2 className="text-3xl font-bold mb-8 text-center md:text-left text-gray-800">
           Reports
         </h2>
 
-        <table className="w-full text-center divide-y divide-gray-200">
-          <tbody>
-            <tr>
-              <td className="py-3 font-semibold text-green-600">
-                Total Income
-              </td>
-              <td className="py-3 font-bold text-green-600">
-                ${incomeToShow.toFixed(2)}
-              </td>
-            </tr>
-            <tr className="bg-gray-50">
-              <td className="py-3 font-semibold text-red-600">Total Expense</td>
-              <td className="py-3 font-bold text-red-600">
-                ${expenseToShow.toFixed(2)}
-              </td>
-            </tr>
-            <tr>
-              <td className="py-3 font-semibold text-blue-600">Balance</td>
-              <td className="py-3 font-bold text-blue-600">
-                ${balance.toFixed(2)}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        {/* Cards for Income, Expense, Balance */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+          <div className="bg-green-50 rounded-lg p-5 flex flex-col items-center shadow hover:shadow-md transition">
+            <p className="text-lg font-semibold text-green-600">Income</p>
+            <p className="text-2xl font-bold text-green-700 mt-2">
+              ${incomeToShow.toFixed(2)}
+            </p>
+          </div>
+          <div className="bg-red-50 rounded-lg p-5 flex flex-col items-center shadow hover:shadow-md transition">
+            <p className="text-lg font-semibold text-red-600">Expense</p>
+            <p className="text-2xl font-bold text-red-700 mt-2">
+              ${expenseToShow.toFixed(2)}
+            </p>
+          </div>
+          <div
+            className={`rounded-lg p-5 flex flex-col items-center shadow hover:shadow-md transition ${
+              balance >= 0 ? "bg-blue-50" : "bg-yellow-50"
+            }`}
+          >
+            <p className="text-lg font-semibold text-blue-600">Balance</p>
+            <p
+              className={`text-2xl font-bold mt-2 ${
+                balance >= 0 ? "text-blue-700" : "text-yellow-700"
+              }`}
+            >
+              ${balance.toFixed(2)}
+            </p>
+          </div>
+        </div>
+
+        {/* Responsive Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full table-auto border-collapse border border-gray-200">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="py-3 px-4 border-b text-left text-gray-700">
+                  Type
+                </th>
+                <th className="py-3 px-4 border-b text-right text-gray-700">
+                  Amount
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="hover:bg-gray-50 transition">
+                <td className="py-3 px-4 border-b text-green-600 font-semibold">
+                  Total Income
+                </td>
+                <td className="py-3 px-4 border-b text-right text-green-700 font-bold">
+                  ${incomeToShow.toFixed(2)}
+                </td>
+              </tr>
+              <tr className="hover:bg-gray-50 transition">
+                <td className="py-3 px-4 border-b text-red-600 font-semibold">
+                  Total Expense
+                </td>
+                <td className="py-3 px-4 border-b text-right text-red-700 font-bold">
+                  ${expenseToShow.toFixed(2)}
+                </td>
+              </tr>
+              <tr className="hover:bg-gray-50 transition">
+                <td className="py-3 px-4 border-b text-blue-600 font-semibold">
+                  Balance
+                </td>
+                <td className="py-3 px-4 border-b text-right text-blue-700 font-bold">
+                  ${balance.toFixed(2)}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

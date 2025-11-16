@@ -96,7 +96,7 @@ const Navbar = () => {
                 <Link
                   to="/profile"
                   onClick={() => setDropdownOpen(false)}
-                  className="w-full block px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors font-medium"
+                  className="w-full block px-4 py-2 hover:bg-blue-500 cursor-pointer transition-colors font-medium"
                 >
                   Update Profile
                 </Link>
@@ -104,7 +104,7 @@ const Navbar = () => {
                 <button
                   onClick={handleLogout}
                   disabled={loggingOut}
-                  className={`w-full text-left px-4 py-2 hover:bg-gray-100 transition-colors font-medium cursor-pointer ${
+                  className={`w-full text-left px-4 py-2 hover:bg-red-500 transition-colors font-medium cursor-pointer ${
                     loggingOut ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 >

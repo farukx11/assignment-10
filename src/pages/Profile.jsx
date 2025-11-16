@@ -9,7 +9,12 @@ const Profile = () => {
   const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
   const [isUpdating, setIsUpdating] = useState(false);
 
-  if (loading) return <p className="text-center mt-10">Loading user info...</p>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
+      </div>
+    );
 
   if (!user) return <p className="text-center mt-10">Please log in first.</p>;
 
@@ -43,63 +48,71 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex justify-center items-start min-h-screen bg-gray-100 p-4 pt-10">
-      {/* Form Card */}
-      <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-md relative">
-        <h2 className="text-2xl font-bold text-center mb-5">My Profile</h2>
+    <div className="flex justify-center px-4 py-10  bg-gray-100">
+      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-6 md:p-8">
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center md:text-left text-gray-800">
+          My Profile
+        </h2>
 
-        {/* Current Profile Photo */}
+        {/* Profile Photo */}
         <div className="text-center mb-4">
           <img
-            src={user.photoURL || "https://via.placeholder.com/80"}
+            src={user.photoURL || "https://via.placeholder.com/100"}
             alt="profile"
             className="w-24 h-24 mx-auto rounded-full border border-gray-300 shadow-sm"
           />
         </div>
 
         {/* Update Form */}
-        <form onSubmit={handleUpdate}>
-          <label className="font-semibold block mb-1">Name:</label>
-          <input
-            type="text"
-            value={name}
-            className="w-full p-2 border rounded mb-3 cursor-text focus:outline-blue-400"
-            onChange={(e) => setName(e.target.value)}
-          />
+        <form onSubmit={handleUpdate} className="space-y-3">
+          <div>
+            <label className="font-semibold block mb-1">Name:</label>
+            <input
+              type="text"
+              value={name}
+              className="w-full p-2 border rounded focus:outline-blue-400"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-          <label className="font-semibold block mb-1">Photo URL:</label>
-          <input
-            type="text"
-            value={photoURL}
-            className="w-full p-2 border rounded mb-3 cursor-text focus:outline-blue-400"
-            onChange={(e) => setPhotoURL(e.target.value)}
-          />
+          <div>
+            <label className="font-semibold block mb-1">Photo URL:</label>
+            <input
+              type="text"
+              value={photoURL}
+              className="w-full p-2 border rounded focus:outline-blue-400"
+              onChange={(e) => setPhotoURL(e.target.value)}
+            />
+          </div>
 
-          <label className="font-semibold block mb-1">Email:</label>
-          <input
-            type="email"
-            value={user.email}
-            readOnly
-            className="w-full p-2 border bg-gray-200 rounded mb-3 cursor-not-allowed"
-          />
+          <div>
+            <label className="font-semibold block mb-1">Email:</label>
+            <input
+              type="email"
+              value={user.email}
+              readOnly
+              className="w-full p-2 border bg-gray-200 rounded cursor-not-allowed"
+            />
+          </div>
 
-          {/* Update Profile Button */}
-          <button
-            type="submit"
-            disabled={isUpdating}
-            className={`block mx-auto w-32 bg-blue-400 text-white py-2 rounded mt-2 hover:bg-blue-500 transition-colors cursor-pointer`}
-          >
-            {isUpdating ? "Updating..." : "Update Profile"}
-          </button>
+          <div className="flex flex-col md:flex-row justify-center gap-3 mt-4">
+            <button
+              type="submit"
+              disabled={isUpdating}
+              className="flex-1 bg-blue-400 text-white py-2 rounded cursor-pointer hover:bg-blue-500 transition-colors font-semibold"
+            >
+              {isUpdating ? "Updating..." : "Update Profile"}
+            </button>
+
+            <button
+              type="button"
+              onClick={logout}
+              className="flex-1 bg-red-400 text-white py-2 rounded cursor-pointer hover:bg-red-500 transition-colors font-semibold"
+            >
+              Logout
+            </button>
+          </div>
         </form>
-
-        {/* Logout Button */}
-        <button
-          onClick={logout}
-          className="block mx-auto w-32 bg-red-400 text-white py-2 rounded mt-4 hover:bg-red-500 transition-colors cursor-pointer"
-        >
-          Logout
-        </button>
       </div>
     </div>
   );

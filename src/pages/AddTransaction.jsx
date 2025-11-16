@@ -96,71 +96,76 @@ const AddTransaction = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 max-w-md bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
-        Add Transaction
-      </h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-          min="0.01"
-          step="0.01"
-        />
-        <select
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-          className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        >
-          <option value="income">Income</option>
-          <option value="expense">Expense</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
-        <textarea
-          placeholder="Description (optional)"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
-        <DatePicker
-          selected={date}
-          onChange={setDate}
-          dateFormat="dd-MM-yyyy"
-          placeholderText="Select date"
-          className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          required
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className={`w-full py-3 rounded-md text-white ${
-            loading
-              ? "bg-gray-400"
-              : "bg-indigo-600 hover:bg-indigo-700 cursor-pointer"
-          }`}
-        >
-          {loading ? "Adding..." : "Add Transaction"}
-        </button>
-      </form>
+    <div className="flex justify-center px-4 mt-10">
+      {" "}
+      {/* mt-20 দিয়ে navbar নিচ থেকে শুরু */}
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 md:p-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-800">
+          Add Transaction
+        </h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full p-2 md:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+          <input
+            type="number"
+            placeholder="Amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            className="w-full p-2 md:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            required
+            min="0.01"
+            step="0.01"
+          />
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            className="w-full p-2 md:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full p-2 md:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+          <textarea
+            placeholder="Description (optional)"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full p-2 md:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+          <DatePicker
+            selected={date}
+            onChange={setDate}
+            dateFormat="dd-MM-yyyy"
+            placeholderText="Select date"
+            className="w-full p-2 md:p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full py-2 md:py-3 rounded-lg text-white font-semibold cursor-pointer ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            }`}
+          >
+            {loading ? "Adding..." : "Add Transaction"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
