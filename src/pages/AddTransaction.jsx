@@ -98,7 +98,6 @@ const AddTransaction = () => {
   return (
     <div className="flex justify-center px-4 mt-10">
       {" "}
-      {/* mt-20 দিয়ে navbar নিচ থেকে শুরু */}
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 md:p-8">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-800">
           Add Transaction
